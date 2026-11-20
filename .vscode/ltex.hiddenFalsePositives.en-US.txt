@@ -1,0 +1,4 @@
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\QIntroduction .\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QUniversity of Bergen Department of Informatics Master's thesis in Software Engineering [month repr:long] [year] \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-|Atrapa-|Dummy\\+|Dummy's\\+)[0-9]+\\Q \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-|Atrapa-|Dummy\\+|Dummy's\\+)[0-9]+\\Q\n\\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-|Atrapa-|Dummy\\+|Dummy's\\+)[0-9]+\\Q: front-matter\\E$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\QConclusion and Future Work .\\E$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\QDesign and Implementation .\\E$"}

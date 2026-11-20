@@ -1,0 +1,189 @@
+:root {
+  --text: #6b6375;
+  --text-h: #08060d;
+  --bg: #fff;
+  --border: #e5e4e7;
+  --code-bg: #f4f3ec;
+  --accent: #aa3bff;
+  --accent-bg: rgba(170, 59, 255, 0.1);
+  --accent-border: rgba(170, 59, 255, 0.5);
+  --social-bg: rgba(244, 243, 236, 0.5);
+  --shadow:
+    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+
+  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+  color-scheme: light dark;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #9ca3af;
+    --text-h: #f3f4f6;
+    --bg: #16171d;
+    --border: #2e303a;
+    --code-bg: #1f2028;
+    --accent: #c084fc;
+    --accent-bg: rgba(192, 132, 252, 0.15);
+    --accent-border: rgba(192, 132, 252, 0.5);
+    --social-bg: rgba(47, 48, 58, 0.5);
+    --shadow:
+      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+  }
+
+  #social .button-icon {
+    filter: invert(1) brightness(2);
+  }
+}
+
+/* Study mode is always light: the participant screens use white cards, and a
+   dark OS theme would otherwise turn the headings light on light. */
+:root.study {
+  --text: #6b6375;
+  --text-h: #1d1d1f;
+  --bg: #f4f5f7;
+  --border: #e5e4e7;
+  color-scheme: light;
+}
+
+#root {
+  width: 1126px;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  border-inline: 1px solid var(--border);
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+h1,
+h2 {
+  font-family: var(--heading);
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+h1 {
+  font-size: 56px;
+  letter-spacing: -1.68px;
+  margin: 32px 0;
+  @media (max-width: 1024px) {
+    font-size: 36px;
+    margin: 20px 0;
+  }
+}
+h2 {
+  font-size: 24px;
+  line-height: 118%;
+  letter-spacing: -0.24px;
+  margin: 0 0 8px;
+  @media (max-width: 1024px) {
+    font-size: 20px;
+  }
+}
+p {
+  margin: 0;
+}
+
+code,
+.counter {
+  font-family: var(--mono);
+  display: inline-flex;
+  border-radius: 4px;
+  color: var(--text-h);
+}
+
+code {
+  font-size: 15px;
+  line-height: 135%;
+  padding: 4px 8px;
+  background: var(--code-bg);
+}
+
+/* Tutorial steps: pulsing outline on the control the step is about (explorer/highlight.ts). */
+@keyframes tutorial-highlight {
+  50% {
+    outline-color: rgba(249, 168, 37, 0.3);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-highlight] {
+    animation: none !important;
+  }
+}
+
+/* "Selected, not visible: …" note next to the search box (explorer/SearchBar.tsx): a short flash when it appears or changes. */
+@keyframes hidden-note-in {
+  0%,
+  35% {
+    background: #ffe08a;
+    border-color: #e0a800;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-testid="hidden-matches"] {
+    animation: none !important;
+  }
+}
+
+/*
+ * The file list's scrollbar is always visible (revision 19): with Chromium's
+ * thin overlay scrollbars, which appear only while scrolling, participants did
+ * not see that the list scrolled and missed files below its edge. A styled
+ * ::-webkit-scrollbar is never an overlay, so the track and thumb stay on
+ * screen, with the same width in every browser build. Do not set the standard
+ * scrollbar-width / scrollbar-color here: in Chromium they override these rules.
+ */
+.explorer-viewport {
+  scrollbar-gutter: stable;
+}
+.explorer-viewport::-webkit-scrollbar {
+  width: 14px;
+  height: 14px;
+}
+.explorer-viewport::-webkit-scrollbar-track {
+  background: #eceef1;
+  border-left: 1px solid #d3d7dc;
+}
+.explorer-viewport::-webkit-scrollbar-thumb {
+  background: #8c949e;
+  border: 3px solid #eceef1;
+  border-radius: 7px;
+  min-height: 40px;
+}
+.explorer-viewport::-webkit-scrollbar-thumb:hover {
+  background: #646b74;
+}
+.explorer-viewport::-webkit-scrollbar-corner {
+  background: #eceef1;
+}
+
+/*
+ * No touchpad swipe navigation (Back/Forward) in the page (revision 22): a
+ * study session ended when the page went away, plausibly by a two-finger
+ * swipe, which Chromium treats as Back.
+ */
+html,
+body {
+  overscroll-behavior-x: none;
+}
